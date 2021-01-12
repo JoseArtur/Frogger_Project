@@ -10,10 +10,12 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Frogger")
 icon = pygame.image.load("frog (1).png")
 pygame.display.set_icon(icon)
+
 #background
 backgroundImage= pygame.image.load("froggerbg.png")
 def background(x,y):
     screen.blit(backgroundImage,(x,y))
+    
 #player
 playerImage = pygame.image.load("frog.png")
 playerX= 370
@@ -31,7 +33,7 @@ enemyX_change = []
 enemyY_change =[]
 num_of_enemies = 5
 for i in range(num_of_enemies):
-    enemyImage.append(pygame.image.load("baby-car (1).png"))
+    enemyImage.append(pygame.image.load("baby-car.png"))
     enemyX.append(0)
     possiblepositons =[300,400,500,600]
     enemyY.append(possiblepositons[random.randrange(0,3)])
@@ -75,25 +77,35 @@ while running:
             playerY = 570
         stop=False
     #changing according pressed keys
-    for i in range(num_of_enemies):
-        enemyX[i]+=0.3
-
-        colision = is_colission(enemyX[i],enemyY[i],playerX,playerY)
-        if colision:
-            stop = True
+    
     playerX += playerX_change
     if playerX<=0:
         playerX=0
     elif playerX>=768:
         playerX=768
+    playerY +=playerY_change
     if playerY<=0:
         playerY=0
     elif playerY>=568:
         playerY = 568
-    playerY +=playerY_change
-  
+    #Enemy Mov
+    for i in range(num_of_enemies):
+        enemyX[i]+= enemyX_change[i]
+        if enemyX[i]<= 0:
+            enemyX[i]=370
+            enemyX_change[i]=-4
+            enemyY[i]+=enemyY_change[i]
+        elif enemyX[i]>=370:
+            enemyX_change[i]=-4
+            enemyY[i] += enemyY_change[i]
+        
+
+        colision = is_colission(enemyX[i],enemyY[i],playerX,playerY)
+        if colision:
+            stop = True
+        enemy(enemyX[i],enemyY[i],i)   
+    
     #inicializating functions
     background(0,0)
     player(playerX,playerY) 
-    enemy(enemyX,enemyY)   
     pygame.display.update()
