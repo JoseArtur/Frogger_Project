@@ -29,23 +29,48 @@ enemyY = []
 enemyX_change = []
 enemyY_change =[]
 num_of_enemies = 3
+change=-10
 for i in range(num_of_enemies):
     enemyImage.append(pygame.image.load("assets/baby-car (1).png"))
     #enemyX.append(random.randint(0, 736))
     #enemyY.append(random.randint(100, 00))
-    enemyX.append(0)
-    possiblepositons =[300,400,500,600]
-    enemyY.append(possiblepositons[random.randrange(0,3)])
-    enemyX_change.append(0.4)
-    enemyY_change.append(0.40)
-    
+    enemyX.append(change)
+    possiblepositons =[300]
+    enemyY.append(possiblepositons[random.randrange(0,1)])
+    enemyX_change.append(0.3)
+    enemyY_change.append(0.3)
+    change-=20
+enemy1Image = []
+enemy1X = []
+enemy1Y = []
+enemy1X_change = []
+enemy1Y_change =[]
+num_of_enemies = 3
+change=0.3
+for i in range(num_of_enemies):
+    enemy1Image.append(pygame.image.load("assets/baby-car (1).png"))
+    #enemyX.append(random.randint(0, 736))
+    #enemyY.append(random.randint(100, 00))
+    enemy1X.append(0)
+    possiblepositons =[400]
+    enemy1Y.append(possiblepositons[random.randrange(0,1)])
+    enemy1X_change.append(change)
+    enemy1Y_change.append(change)
+    change+=0.3
 def player(x,y):
     screen.blit(playerImage,(x,y))
 def enemy(x,y,i):
     screen.blit(enemyImage[i],(x,y)) 
-    
+def enemy1(x,y,i):
+    screen.blit(enemy1Image[i],(x,y))     
 def is_colission(enemyX,enemyY,playerX,playerY):
     distance = math.sqrt((math.pow(enemyX-playerX,2)) + (math.pow(enemyY-playerY,2)))
+    if distance<30:
+        return True
+    else:
+        return False
+def is_colission(enemy1X,enemy1Y,playerX,playerY):
+    distance = math.sqrt((math.pow(enemy1X-playerX,2)) + (math.pow(enemy1Y-playerY,2)))
     if distance<30:
         return True
     else:
@@ -95,20 +120,29 @@ while running:
         playerY = 568
     #Enemy Mov
     for i in range(num_of_enemies):
-        enemyX[i] += enemyX_change[i]
-        if enemyX[i] <= 0:
-            enemyX_change[i] = 0.4
-            enemyY[i] += enemyY_change[i]
-        elif enemyX[i] >= 736:
-            enemyX_change[i] = -0.4
-            enemyY[i] += enemyY_change[i]
+        enemyX[i] += enemyX_change[i]          
+        if enemyX[i] <= -1.5:
+            enemyX_change[i] = 0.0
+          
+        elif enemyX[i] >= 800:
+            enemyX_change[i] = 0.0
+    for i in range(num_of_enemies):
+        enemy1X[i] += enemy1X_change[i]          
+        if enemy1X[i] <= -1.5:
+            enemy1X_change[i] = 0.0
+          
+        elif enemy1X[i] >= 800:
+            enemy1X_change[i] = 0.0
+                    
 
 
         colision = is_colission(enemyX[i],enemyY[i],playerX,playerY)
+        colision = is_colission(enemy1X[i],enemy1Y[i],playerX,playerY)
         if colision:
           
             stop = True
         enemy(enemyX[i],enemyY[i],i)   
+        enemy1(enemy1X[i],enemy1Y[i],i)   
     
     #inicializating functions
     player(playerX,playerY) 
