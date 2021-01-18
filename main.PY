@@ -6,7 +6,6 @@ pygame.init()
 WIDTH = 800
 HEIGHT = 600
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
-
 pygame.display.set_caption("assets/Frogger")
 icon = pygame.image.load("assets/frog (1).png")
 pygame.display.set_icon(icon)
@@ -28,17 +27,38 @@ enemyX = []
 enemyY = []
 enemyX_change = []
 enemyY_change =[]
-num_of_enemies = 3
-for i in range(num_of_enemies):
+num_of_enemies = 20
+def moreenemy():
+    enemyImage = []
+    enemyX = []
+    enemyY = []
+    enemyX_change = []
+    enemyY_change =[]
+    for i in range(3):
+        enemyImage.append(pygame.image.load("assets/baby-car (1).png"))
+    #enemyX.append(random.randint(0, 736))
+    #enemyY.append(random.randint(100, 00))
+    
+        enemyX.append(10)
+        possiblepositonsX =[600,1000,1,600]
+        enemyY.append(possiblepositonsX[random.randrange(0,3)])
+        enemyX_change.append(0.4)
+        enemyY_change.append(0.40)
+j=0
+"""for i in range(num_of_enemies):
     enemyImage.append(pygame.image.load("assets/baby-car (1).png"))
     #enemyX.append(random.randint(0, 736))
     #enemyY.append(random.randint(100, 00))
-    enemyX.append(0)
-    possiblepositons =[300,400,500,600]
-    enemyY.append(possiblepositons[random.randrange(0,3)])
+    possiblepositonsX =[-200,-100,-50,-400]
+    enemyX.append(possiblepositonsX[j])
+    j+=1
+    if j==4:
+        j=0
+    possiblepositonsY =[700,400,500,600]
+    enemyY.append(possiblepositonsY[random.randrange(0,3)])
     enemyX_change.append(0.4)
-    enemyY_change.append(0.40)
-    
+    enemyY_change.append(0.40)"""
+enemyy(300,-20)
 def player(x,y):
     screen.blit(playerImage,(x,y))
 def enemy(x,y,i):
@@ -94,22 +114,22 @@ while running:
     elif playerY>=568:
         playerY = 568
     #Enemy Mov
-    for i in range(num_of_enemies):
+    """for i in range(num_of_enemies):
         enemyX[i] += enemyX_change[i]
-        if enemyX[i] <= 0:
+        #if enemyX[i] <= 0:
+            #enemyX_change[i] = 0.4
+            #enemyY[i] += enemyY_change[i]
+        if enemyX[i] >= 800:
             enemyX_change[i] = 0.4
-            enemyY[i] += enemyY_change[i]
-        elif enemyX[i] >= 736:
-            enemyX_change[i] = -0.4
+            enemyX[i]=-1
             enemyY[i] += enemyY_change[i]
 
 
-        colision = is_colission(enemyX[i],enemyY[i],playerX,playerY)
+        #colision = is_colission(enemyX[i],enemyY[i],playerX,playerY)
         if colision:
-          
             stop = True
         enemy(enemyX[i],enemyY[i],i)   
-    
+    """
     #inicializating functions
     player(playerX,playerY) 
     pygame.display.update()
