@@ -30,17 +30,26 @@ enemyX = []
 enemyY = []
 enemyX_change = []
 enemyY_change =[]
-num_of_enemies = 200
-change=-100
+num_of_enemies = 100
+change=600
+j=True
+enemypng = "assets/baby-car (1).png"
+
+velocity = 0.5
 def enemyy(position,change):
     for i in range(num_of_enemies):
-        enemyImage.append(pygame.image.load("assets/baby-car (1).png"))
+        #enemypng = "assets/baby-car (1).png"
+        if  j = true
+        enemyImage.append(pygame.image.load(enemypng))
         #enemyX.append(random.randint(0, 736))
         #enemyY.append(random.randint(100, 00))
+            #ticks_enemys = [120, 90, 120, 90, 150]
+
         enemyX.append(change)
-        possiblepositons =[position]
-        enemyY.append(possiblepositons[random.randrange(0,1)])
-        enemyX_change.append(0.3)
+        possiblepositonsY =[position]
+        enemyY.append(possiblepositonsY[random.randrange(0,1)])
+    
+        enemyX_change.append(velocity)
         enemyY_change.append(0.3)
         change+=-200
 enemyy(300,-100)
@@ -55,7 +64,7 @@ def enemy(x,y,i):
    # screen.blit(enemy1Image[i],(x,y))     
 def is_colission(enemyX,enemyY,playerX,playerY):
     distance = math.sqrt((math.pow(enemyX-playerX,2)) + (math.pow(enemyY-playerY,2)))
-    if distance<30:
+    if distance<28:
         return True
     else:
         return False
@@ -111,12 +120,20 @@ while running:
     #Enemy Mov
     for i in range(num_of_enemies):
         enemyX[i] += enemyX_change[i]          
-        if enemyX[i] <= -1.5:
-            enemyX_change[i] = 0.3
+        if enemyX[i] <= -1.5 and i<=6 and j==True:
+            enemyX_change[i] = velocity
           
-        elif enemyX[i] >= 800:
-            enemyX_change[i] = 0.0
-   
+        elif enemyX[i] >= 800 and i<=3:
+            enemyX_change[i] = velocity
+            enemyX[i] = -70
+            enemyY[i] = 400
+        elif enemyX[i] >=800 and i>3:
+            enemyX_change[i] = velocity *-1
+            enemyX[i] = 800
+            enemyY[i] = 500
+            enemy.png =  "assets/frog.png"
+            enemyImage.append(enemypng)
+            j=False
 
 
         colision = is_colission(enemyX[i],enemyY[i],playerX,playerY)
