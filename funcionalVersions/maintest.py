@@ -39,7 +39,10 @@ velocity = 0.5
 def enemyy(position,change):
     for i in range(num_of_enemies):
         #enemypng = "assets/baby-car (1).png"
-        if  j = true
+        if  j == True:
+            enemypng = "assets/baby-car (1).png"
+        else:
+            enemypng =  "assets/frog.png"
         enemyImage.append(pygame.image.load(enemypng))
         #enemyX.append(random.randint(0, 736))
         #enemyY.append(random.randint(100, 00))
@@ -131,7 +134,7 @@ while running:
             enemyX_change[i] = velocity *-1
             enemyX[i] = 800
             enemyY[i] = 500
-            enemy.png =  "assets/frog.png"
+            enemypng =  "assets/frog.png"
             enemyImage.append(enemypng)
             j=False
 
