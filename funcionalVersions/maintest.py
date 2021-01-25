@@ -135,7 +135,7 @@ while running:
             enemyX[i] = 800
             enemyY[i] = 500
             enemypng =  "assets/frog.png"
-            enemyImage.append(enemypng)
+            enemyImage.append(pygame.image.load(enemypng))
             j=False
 
 
